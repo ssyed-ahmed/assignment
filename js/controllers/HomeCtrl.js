@@ -3,14 +3,16 @@
     angular.module('Op_Central')
         .controller('HomeCtrl', HomeCtrl);
 
-    HomeCtrl.$inject = ['$scope', '$uibModal', 'UserService'];
-    function HomeCtrl($scope, $uibModal, UserService) {
+    HomeCtrl.$inject = ['$scope', '$uibModal', 'UserService', '$filter'];
+    function HomeCtrl($scope, $uibModal, UserService, $filter) {
         var homeCtrl = this;
+        homeCtrl.data = [];
         homeCtrl.users = [];
         homeCtrl.selectedUsers = [];
 
         homeCtrl.openUsersModal = function() {
             let userAvatar = null;
+            let data = [];
             let userAvatars = [];
             UserService.fetchUsers().then(function(response) {
                 var users = response.data;
@@ -26,6 +28,7 @@
                         })
                 }
 
+                homeCtrl.data = userAvatars;
                 homeCtrl.users = userAvatars;
 
                 var modalInstance = $uibModal.open({
@@ -35,7 +38,9 @@
                     windowClass: 'modal-fit',
                     scope: $scope,
                     controller: function($scope, $uibModalInstance) {
+                        $scope.users = homeCtrl.users;
                         $scope.selection = [];
+                        $scope.searchTerm = '';
                         $scope.ok = function() {      
                             console.log(homeCtrl.selectedUsers);
                             $uibModalInstance.close();                        
@@ -51,8 +56,9 @@
                         $scope.toggle = function(user) {
                             user.selected = !user.selected;
                         };
-                        
-                        $scope.users = homeCtrl.users;          
+                        $scope.filterUsers = function() {
+                            $scope.users = $filter('filter')(homeCtrl.data, $scope.searchTerm);
+                        };
                     }
                   });
             });            

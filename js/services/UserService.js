@@ -14,6 +14,20 @@
                     return data;
                 });
             return promise;
-        }
+        };
+
+        service.fetchUserAvatar = function(userId) {
+            var promise = $http.get('../js/data/user-avatar.json')
+                .then(function(data) {
+                    let UserAvatars = data.data;
+                    for (let i = 0; i < UserAvatars.length; i++) {
+                        let userAvatar = UserAvatars[i];
+                        if (userAvatar.id === userId) {
+                            return userAvatar;
+                        }
+                    }
+                });
+            return promise;
+        };
     }
 })();

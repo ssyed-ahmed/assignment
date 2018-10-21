@@ -4,9 +4,21 @@
         </h3>
     </div>
     <div class="modal-body" id="modal-body">
-        <div ng-repeat="user in users">
-            <user></user>
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- search box here -->
+            </div>
         </div>
+        <div class="row top-spacer">
+            <div class="col-xs-12">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="user in users">
+                        <!-- {{user.name}} -->
+                        <user></user>
+                    </li>
+                </ul>
+            </div>
+        </div>        
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>

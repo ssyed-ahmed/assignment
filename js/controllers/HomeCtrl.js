@@ -9,9 +9,26 @@
         homeCtrl.users = [];
 
         homeCtrl.openUsersModal = function() {
+            let userAvatar = null;
+            let userAvatars = [];
             UserService.fetchUsers().then(function(response) {
                 var users = response.data;
-                homeCtrl.users = users;
+                // homeCtrl.users = users;
+                console.log(users);
+                for (let i = 0; i < users.length; i++) {
+                    let userObj = users[i];
+                    UserService.fetchUserAvatar(userObj.id)
+                        .then(function(response) {
+                            var avatar = response;
+                            if (avatar) {
+                                userAvatar = new User(userObj.id, userObj.full_name, avatar.avatar)
+                                console.log(userAvatar);
+                                userAvatars.push(userAvatar);
+                            }
+                        })
+                }
+
+                homeCtrl.users = userAvatars;
 
                 var modalInstance = $uibModal.open({
                     animation: false,
@@ -32,5 +49,11 @@
                   });
             });            
         };
+
+        function User(id, name, avatar) {
+            this.id = id;
+            this.name = name;
+            this.avatar = avatar;
+        }
     }
 })();

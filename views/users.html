@@ -1,6 +1,6 @@
 <div class="modal-header">
         <h3 class="modal-title title-heading" id="modal-title">
-            Select Users <i class="fas fa-times-circle close-button" ng-click="cancel()"></i>
+            Select Users <i class="far fa-times-circle close-button" ng-click="cancel()"></i>
         </h3>
     </div>
     <div class="modal-body" id="modal-body">
@@ -9,7 +9,9 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search ..." ng-model="searchTerm">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary search-button" type="button" ng-click="filterUsers()"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-primary search-button" type="button" ng-click="filterUsers()">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </span>
                 </div>
             </div>

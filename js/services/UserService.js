@@ -9,7 +9,11 @@
         var service = this;
 
         service.fetchUsers = function() {
-            
+            var promise = $http.get('../js/data/user-list.json')
+                .then(function(data) {
+                    return data;
+                });
+            return promise;
         }
     }
 })();

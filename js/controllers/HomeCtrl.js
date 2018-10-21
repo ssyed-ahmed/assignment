@@ -49,12 +49,11 @@
                             homeCtrl.selectedUsers = [];
                             $uibModalInstance.close();
                         };
-                        $scope.selectUser = function(user) {
-                            homeCtrl.selectedUsers.push(user);
-                            $scope.selected = user.id;
-                        };
                         $scope.toggle = function(user) {
                             user.selected = !user.selected;
+                            if (user.selected) {
+                                homeCtrl.selectedUsers.push(user);
+                            }
                         };
                         $scope.filterUsers = function() {
                             $scope.users = $filter('filter')(homeCtrl.data, $scope.searchTerm);

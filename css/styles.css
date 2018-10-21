@@ -1,0 +1,16 @@
+:root {
+    --blue-color: #4185E4;
+}
+
+.title-heading {
+    color: var(--blue-color);
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+}
+.close-button {
+    color: var(--blue-color);
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}

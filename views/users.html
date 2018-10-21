@@ -6,21 +6,34 @@
     <div class="modal-body" id="modal-body">
         <div class="row">
             <div class="col-xs-12">
-                <!-- search box here -->
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search ...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary search-button" type="button"><i class="fas fa-search"></i></button>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="row top-spacer">
             <div class="col-xs-12">
-                <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="user in users">
-                        <!-- {{user.name}} -->
+                <ul class="list-group" data-toggle="items">
+                    <!-- <li class="list-group-item" ng-repeat="user in users" ng-click="selectUser(user)">
                         <user></user>
-                    </li>
+                    </li> -->
+                    <a href="#" class="list-group-item" ng-repeat="user in users" 
+                        ng-click="toggle(user)" ng-class="{active: user.selected}">
+                        <user></user>
+                    </a>
                 </ul>
             </div>
-        </div>        
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                    {{selection | json}}
+            </div>
+        </div>       
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-success" type="button" ng-click="ok()">Select</button>
     </div>

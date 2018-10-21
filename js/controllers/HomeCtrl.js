@@ -7,14 +7,13 @@
     function HomeCtrl($scope, $uibModal, UserService) {
         var homeCtrl = this;
         homeCtrl.users = [];
+        homeCtrl.selectedUsers = [];
 
         homeCtrl.openUsersModal = function() {
             let userAvatar = null;
             let userAvatars = [];
             UserService.fetchUsers().then(function(response) {
                 var users = response.data;
-                // homeCtrl.users = users;
-                console.log(users);
                 for (let i = 0; i < users.length; i++) {
                     let userObj = users[i];
                     UserService.fetchUserAvatar(userObj.id)
@@ -22,7 +21,6 @@
                             var avatar = response;
                             if (avatar) {
                                 userAvatar = new User(userObj.id, userObj.full_name, avatar.avatar)
-                                console.log(userAvatar);
                                 userAvatars.push(userAvatar);
                             }
                         })
@@ -37,13 +35,23 @@
                     windowClass: 'modal-fit',
                     scope: $scope,
                     controller: function($scope, $uibModalInstance) {
-                        $scope.ok = function() {                        
-                            $uibModalInstance.close();
-                        };
-      
+                        $scope.selection = [];
+                        $scope.ok = function() {      
+                            console.log(homeCtrl.selectedUsers);
+                            $uibModalInstance.close();                        
+                        };      
                         $scope.cancel = function() {
+                            homeCtrl.selectedUsers = [];
                             $uibModalInstance.close();
                         };
+                        $scope.selectUser = function(user) {
+                            homeCtrl.selectedUsers.push(user);
+                            $scope.selected = user.id;
+                        };
+                        $scope.toggle = function(user) {
+                            user.selected = !user.selected;
+                        };
+                        
                         $scope.users = homeCtrl.users;          
                     }
                   });

@@ -15,7 +15,13 @@
     cursor: pointer;
 }
 .user-container {
-    background-color: #fff;
+    cursor: pointer;
+}
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    background-color: #D8F4C4;
+    border-color: #D8F4C4;
+    color: #555;
 }
 .top-spacer {
     padding-top: 16px;
@@ -35,4 +41,10 @@
 .user-title {
     vertical-align: middle;
     line-height: 40px;
+    font-weight: bold;
+}
+.search-button {
+    color: #fff;
+    background-color: var(--blue-color);
+    border-color: var(--blue-color);
 }

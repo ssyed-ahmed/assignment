@@ -58,6 +58,13 @@
                             user.selected = !user.selected;
                             if (user.selected) {
                                 homeCtrl.selectedUsers.push(user);
+                            } else {
+                                let index = homeCtrl.selectedUsers.findIndex((obj, i) => {
+                                    return userAvatar.id === obj.id? i: -1;
+                                });
+                                if (index != -1) {
+                                    homeCtrl.selectedUsers.splice(index, 1);
+                                }
                             }
                         };
                         $scope.filterUsers = function() {

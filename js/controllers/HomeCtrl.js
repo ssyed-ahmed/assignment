@@ -9,6 +9,7 @@
         homeCtrl.data = [];
         homeCtrl.users = [];
         homeCtrl.selectedUsers = [];
+        homeCtrl.searchTerm = '';
 
         homeCtrl.openUsersModal = function() {
             let userAvatar = null;
@@ -60,7 +61,7 @@
                             }
                         };
                         $scope.filterUsers = function() {
-                            $scope.users = $filter('filter')(homeCtrl.data, $scope.searchTerm);
+                            $scope.users = $filter('filter')(homeCtrl.data, homeCtrl.searchTerm);
                         };
                         $scope.back = function() {
                             let selectedUsers = UserService.getSelectedUsers();

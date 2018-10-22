@@ -10,8 +10,6 @@
         homeCtrl.users = [];
         homeCtrl.selectedUsers = [];
 
-        console.log('Enter home ctrl');
-
         homeCtrl.openUsersModal = function() {
             let userAvatar = null;
             let data = [];

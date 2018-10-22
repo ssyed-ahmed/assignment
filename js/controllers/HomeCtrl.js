@@ -3,12 +3,14 @@
     angular.module('Op_Central')
         .controller('HomeCtrl', HomeCtrl);
 
-    HomeCtrl.$inject = ['$scope', '$uibModal', 'UserService', '$filter'];
-    function HomeCtrl($scope, $uibModal, UserService, $filter) {
+    HomeCtrl.$inject = ['$scope', '$uibModal', 'UserService', '$filter', '$state', '$stateParams', '$location'];
+    function HomeCtrl($scope, $uibModal, UserService, $filter, $state) {
         var homeCtrl = this;
         homeCtrl.data = [];
         homeCtrl.users = [];
         homeCtrl.selectedUsers = [];
+
+        console.log('Enter home ctrl');
 
         homeCtrl.openUsersModal = function() {
             let userAvatar = null;
@@ -33,20 +35,24 @@
 
                 var modalInstance = $uibModal.open({
                     animation: false,
-                    templateUrl: 'views/users.html',
+                    templateUrl: 'views/users-modal.html',
                     backdrop: 'static',
                     windowClass: 'modal-fit',
                     scope: $scope,
-                    controller: function($scope, $uibModalInstance) {
+                    controller: function($scope, $uibModalInstance, UserService) {
                         $scope.users = homeCtrl.users;
                         $scope.selection = [];
                         $scope.searchTerm = '';
+                        $scope.selectedusers = [];
                         $scope.ok = function() {      
-                            console.log(homeCtrl.selectedUsers);
-                            $uibModalInstance.close();                        
+                            // $uibModalInstance.close();                      
+                            $scope.selectedusers = homeCtrl.selectedUsers;
+                            UserService.setSelectedUsers(homeCtrl.selectedUsers);
+                            $state.go('selectedusers');
                         };      
                         $scope.cancel = function() {
                             homeCtrl.selectedUsers = [];
+                            $state.go('userslist');
                             $uibModalInstance.close();
                         };
                         $scope.toggle = function(user) {
@@ -57,6 +63,10 @@
                         };
                         $scope.filterUsers = function() {
                             $scope.users = $filter('filter')(homeCtrl.data, $scope.searchTerm);
+                        };
+                        $scope.back = function() {
+                            let selectedUsers = UserService.getSelectedUsers();
+                            $state.go('userslist');                            
                         };
                     }
                   });

@@ -7,13 +7,22 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
-        // $stateProvider
-        //     .state('home', {
-        //         url: '/home',
-        //         templateUrl: 'views/home.html',
-        //         controller: 'HomeCtrl',
-        //         controllerAs: 'homeCtrl'
-        //     });
-        //     $urlRouterProvider.otherwise('/home');
+        $stateProvider
+            .state('home', {
+                url: '/',
+                templateUrl: 'index.html',
+                controller: 'HomeCtrl',
+                controllerAs: 'homeCtrl'
+            })
+            .state('userslist', {
+                url: '/userslist',
+                templateUrl: 'views/users-list.html'
+            })
+            .state('selectedusers', {
+                url: '/selectedusers',
+                templateUrl: 'views/users-selected.html'
+            })
+
+            $urlRouterProvider.otherwise('/userslist');
     }
 })();

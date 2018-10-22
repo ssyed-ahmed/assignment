@@ -8,6 +8,8 @@
     function UserService($http) {
         var service = this;
 
+        service.selectedUsers = [];
+
         service.fetchUsers = function() {
             var promise = $http.get('../js/data/user-list.json')
                 .then(function(data) {
@@ -28,6 +30,14 @@
                     }
                 });
             return promise;
+        };
+
+        service.getSelectedUsers = function() {
+            return service.selectedUsers;
+        };
+
+        service.setSelectedUsers = function(users) {
+            service.selectedUsers = users;
         };
     }
 })();

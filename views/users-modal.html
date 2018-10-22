@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title title-heading" id="modal-title">
+        Select Users <i class="far fa-times-circle close-button" ng-click="cancel()"></i>
+    </h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div ui-view>
+        
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-success" type="button" ng-click="ok()">Select</button>
+</div>

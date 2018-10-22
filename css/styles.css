@@ -48,3 +48,6 @@
     background-color: var(--blue-color);
     border-color: var(--blue-color);
 }
+.back-button {
+    float: right;
+}

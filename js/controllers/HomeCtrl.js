@@ -26,7 +26,7 @@
                                 userAvatar = new User(userObj.id, userObj.full_name, avatar.avatar)
                                 userAvatars.push(userAvatar);
                             }
-                        })
+                        }, errorHandler)
                 }
 
                 homeCtrl.data = userAvatars;
@@ -76,13 +76,18 @@
                         };
                     }
                   });
-            });            
+            }, errorHandler);            
+        };
+
+        function errorHandler(response) {
+            // Note: For now just log the error
+            console.log(response);
         };
 
         function User(id, name, avatar) {
             this.id = id;
             this.name = name;
             this.avatar = avatar;
-        }
+        };
     }
 })();
